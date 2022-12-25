@@ -1,0 +1,143 @@
+import java.util.Arrays;
+/**
+ *
+ * @author (Matthew Laframboise)
+ * @version (12/01/2022)
+ */
+public class LabPrac2a
+{
+
+    //INSTRUCTIONS:
+    //COMPLETE ALL FOUR METHODS IN THIS FILE
+    //YOU MAY OR MAY NOT NEED TO CHANGE THE RETURN VALUE. IT IS THERE JUST SO THIS CLASS WILL COMPILE TO START
+    //TEST YOUR WORK BY RUNNING LabPrac2aTester
+    //DO NOT EDIT LabPrac2aTester
+    //DO NOT EDIT LabPrac2aTester
+    //DO NOT EDIT LabPrac2aTester
+    //DO NOT EDIT LabPrac2aTester
+
+    //return true if array is strictly increasing
+    //{1,1,2,3} should return false
+    //{1,2,3,14} should return true
+    //you do not need to worry about empty array
+    //CHANGE THE RETURN VALUE AS YOU NEED
+    public boolean checkIncreasing(int[] arrayToCheck){  
+        boolean check = true;
+        for (int i = 0; i<arrayToCheck.length-1; i++){
+            //CHECK IF NEXT ELEMENT IS LARGER OR EQUAL
+            if (arrayToCheck[i] >= arrayToCheck[i+1]){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    //Find and return the second even number in the array
+    //if there is no second even number then return -1
+    //CHANGE THE RETURN VALUE AS YOU NEED
+    public int findSecondEven(int[] arrayToCheck){
+        int second = -1;
+        int count = 0;
+        //FIND FIRST EVEN NUMBER
+        for (int i = 0; i<arrayToCheck.length; i++){
+            if (arrayToCheck[i] % 2 == 0){
+                count++;
+                break;
+            }
+            else{
+                count++;
+            }
+        }
+        //START AT THE NEXT ELEMENT, FIND NEXT EVEN NUMBER, SAVE THIS VALUE
+        for (int i = count; i<arrayToCheck.length; i++){
+            if (arrayToCheck[i] % 2 == 0){
+                second = arrayToCheck[i];
+                break;
+            }
+        }
+        return second;
+    }
+
+    //return a new array consisting of all elements that are before the FIRST four that is adjacent to a two
+    //if no adjacent 4,2 in the array or no numbers before the first 4,2 then return the empty array
+    //{1,4,2,3} should return {1}
+    //{1,4,3,4,2} should return {1,4,3}
+    //{1,4,3,2} should return {}
+    //{4,2} should return {}
+    //CHANGE THE RETURN VALUE AS YOU NEED
+    public int[] beforeFortyTwo(int[] arrayToCheck){
+        int[] array = new int[arrayToCheck.length];
+        int arraySize = 0;
+        boolean check = false;
+        
+        //CHECK IS 4,2 EVEN EXIST
+        for (int i = 0; i < arrayToCheck.length-1; i++){
+            if (arrayToCheck[i] == 4 && arrayToCheck[i+1] == 2){
+                check = true;
+            }
+        }
+
+        //IF 4,2 EXIST FILL ARRAY UNTIL WE HIT 4,2
+        if(check == true){
+            for (int i = 0; i<arrayToCheck.length-1; i++){
+                if (arrayToCheck[i] == 4 && arrayToCheck[i+1] == 2){
+                    break;
+                }
+                else{
+                    array[i] = arrayToCheck[i];
+                    arraySize++;
+                }
+            }
+        }
+
+        //CORRECT ARRAY SIZE
+        int[]  newArray = Arrays.copyOf(array, arraySize);
+        return newArray;
+    }
+
+    //FIND THE GAP - THE NUMBER OF ELEMENTS BETWEEN SECOND AND THIRD 7
+    //YOU MAY ASSUME AT LEAST 3 SEVENS
+    //{1,7,1,7,1,7} should return 1
+    //{7,7,7} should return 0
+    //{1,2,7,6,7,5,6,6,7} should return 3
+    //CHANGE THE RETURN VALUE AS YOU NEED
+    public int findTheGap(int[] arrayToCheck){   
+        int first = 0;
+        int second = 0;
+        int third = 0;
+        int count = 0;
+        //FIND FIRST 7
+        for (int i = 0; i<arrayToCheck.length; i++){
+            if (arrayToCheck[i] == 7){
+                first = i;
+                count++;
+                break;
+            }
+            else{
+                count++;
+            }
+        }
+        //FIND SECOND 7
+        for (int i = count; i<arrayToCheck.length; i++){
+            if (arrayToCheck[i] == 7){
+                second = i;
+                count++;
+                break;
+            }
+            else{
+                count++;
+            }
+        }
+        //FIND THIRD 7
+        for (int i = count; i<arrayToCheck.length; i++){
+            if (arrayToCheck[i] == 7){
+                third = i;
+                break;
+            }
+        }
+        
+        //SUBRACT TO GET DIFFERENCE, SUBTRACT 1 BECUASE WE WANT SPACE INBETWEEN
+        return third - second - 1;
+    }
+}
